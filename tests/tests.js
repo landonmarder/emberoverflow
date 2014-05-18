@@ -29,12 +29,12 @@ test("index page has a title and a list of questions", function() {
     equal(find("ul:not(.nav) > li").length, 2, "There are two items in the list");
   });
 
-  test('question links on index page lead to questions', function(){
-    visit('/');
-    click('ul:not(.nav) > li > a:first');
+test('question links on index page lead to questions', function(){
+  visit('/');
+  click('ul:not(.nav) > li > a:first');
 
-    andThen(function(){
-      equal(find('h2').length, 1,'Question header is rendered');
-    });
+  andThen(function(){
+    equal(find('h2').length, 1,'Question header is rendered');
   });
+});
 });
