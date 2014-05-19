@@ -37,4 +37,18 @@ test('question links on index page lead to questions', function(){
     equal(find('h2').length, 1,'Question header is rendered');
   });
 });
+
+test('user will be able to log in', function(){
+  delete localStorage['currentUser'];
+  App.set('currentUser', undefined);
+
+  visit('/sign-in');
+
+  fillIn('.form-control', 'tom@dale.com');
+  click('button');
+
+  andThen(function() {
+    equal(find('p').text(), 'You are already signed in!', 'Signed-in message rendered');
+  });
+});
 });

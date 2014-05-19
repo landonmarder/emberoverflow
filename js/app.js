@@ -3,7 +3,9 @@ App = Ember.Application.create({
   // rootElement: '#element-id',
 
   // logs a message to console once the URL changes (for debugging)
-  LOG_TRANSITIONS: true
+  LOG_TRANSITIONS: true,
+
+  currentUser: localStorage['currentUser']
 });
 
 App.Store = DS.Store.extend({
@@ -13,4 +15,5 @@ App.Store = DS.Store.extend({
 App.Router.map(function() {
   this.route('about');
   this.resource('question', { path: '/:question_id' });
+  this.route('sign-in');
 });

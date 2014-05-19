@@ -23,6 +23,19 @@
           {{/link-to}}
         </li>
       </ul>
+      <ul class='nav navbar-nav'>
+        {{#if userSignedIn}}
+          <li>
+            <a href="#" {{action signOut}}>
+              Welcome, {{signedInUser.fullname}} — Sign out
+            </a>
+          </li>
+        {{else}}
+          <li>
+            {{#link-to 'sign-in'}}Sign in{{/link-to}}
+          </li>
+        {{/if}}
+      </ul>
     </nav>
       {{outlet}}
   </script>
@@ -57,7 +70,7 @@
           {{question}}
         </p>
         <p>
-          Asked by {{author}}
+          Asked by {{author.fullname}}
         </p>
       </div>
     </div>
@@ -70,6 +83,26 @@
         <p>
           Emberoverflow is a question and answer site for programmers . . .
         </p>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" id='sign-in'>
+    <div class='row'>
+      <div class='col-md-8'>
+        {{#if controllers.application.userSignedIn}}
+          <p>You are already signed in!</p>
+        {{else}}
+          <form {{action signIn on='submit'}}>
+            <div class='form-group'>
+              <label for='email'>Email address</label>
+              {{input id='email' value=email classNames='form-control' placeholder='Enter your email address'}}
+            </div>
+            <button class='btn btn-primary' type='submit'>
+              Sign In
+            </button>
+          </form>
+        {{/if}}
       </div>
     </div>
   </script>
@@ -90,7 +123,9 @@
 
   <script src="js/routes/application_routes.js"></script>
 
+  <script src="js/controllers/sign_in_controller.js"></script>
   <script src="js/controllers/application_controllers.js"></script>
+
 
   <!-- to activate the test runner, add the "?test" query string parameter -->
   <script src="tests/runner.js"></script>
